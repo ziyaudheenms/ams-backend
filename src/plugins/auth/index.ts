@@ -4,7 +4,7 @@ import { client } from "../db/index.js";
 
 export const auth = betterAuth<BetterAuthOptions>({
 	database: mongodbAdapter(client),
-	trustedOrigins: process.env.CORS_ORIGIN ? [process.env.CORS_ORIGIN] : ["*"],
+	trustedOrigins: process.env.CORS_ORIGIN && process.env.CORS_ORIGIN_DEV ? [process.env.CORS_ORIGIN, process.env.CORS_ORIGIN_DEV] : ["*"],
 	emailAndPassword: {
 		enabled: true,
 	},
