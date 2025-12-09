@@ -68,12 +68,13 @@ export const userUpdateSchema: RouteShorthandOptions["schema"] = {
         then: {
           properties: {
             student: {
+              type: "object",
               anyOf: [
-                { required: ["adm_number"] },
-                { required: ["adm_year"] },
-                { required: ["candidate_code"] },
-                { required: ["department"] },
-                { required: ["date_of_birth"] },
+                { type: "object", required: ["adm_number"] },
+                { type: "object", required: ["adm_year"] },
+                { type: "object", required: ["candidate_code"] },
+                { type: "object", required: ["department"] },
+                { type: "object", required: ["date_of_birth"] },
               ],
             },
           },
@@ -86,10 +87,11 @@ export const userUpdateSchema: RouteShorthandOptions["schema"] = {
         then: {
           properties: {
             teacher: {
+              type: "object",
               anyOf: [
-                { required: ["designation"] },
-                { required: ["department"] },
-                { required: ["date_of_joining"] },
+                { type: "object", required: ["designation"] },
+                { type: "object", required: ["department"] },
+                { type: "object", required: ["date_of_joining"] },
               ],
             },
           },
@@ -102,9 +104,10 @@ export const userUpdateSchema: RouteShorthandOptions["schema"] = {
         then: {
           properties: {
             parent: {
+              type: "object",
               anyOf: [
-                { required: ["relation"] },
-                { required: ["childID"] },
+                { type: "object", required: ["relation"] },
+                { type: "object", required: ["childID"] },
               ],
             },
           },
@@ -179,6 +182,7 @@ export const userCreateSchema: RouteShorthandOptions["schema"] = {
         then: {
           properties: {
             student: {
+              type: "object",
               required: ["adm_number", "adm_year", "date_of_birth", "department"],
             },
           },
@@ -191,6 +195,7 @@ export const userCreateSchema: RouteShorthandOptions["schema"] = {
         then: {
           properties: {
             teacher: {
+              type: "object",
               required: ["designation", "date_of_joining"],
             },
           },
@@ -203,6 +208,7 @@ export const userCreateSchema: RouteShorthandOptions["schema"] = {
         then: {
           properties: {
             parent: {
+              type: "object",
               required: ["relation", "childID"],
             },
           },
