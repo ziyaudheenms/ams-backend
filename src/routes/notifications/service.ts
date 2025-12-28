@@ -21,15 +21,7 @@ export const postNotification = async (
       data: "",
     });
   }
-  // checking the role of the requesting user model
-  if (request.user.role === "student" || request.user.role === "parent") {
-    return reply.status(403).send({
-      status_code: 403,
-      message: "User Request Forbidden , Since You are Not a Staff",
-      data: "",
-    })
-  }
-
+ 
   const { targetGroup, targetID, targetUsers, title, message, priorityLevel, notificationType } = request.body as {
     targetGroup: string;
     targetID?: string;
@@ -108,8 +100,8 @@ export const postNotification = async (
       })
     }
     else {
-      return reply.status(201).send({
-        "status_code": 201,
+      return reply.status(403).send({
+        "status_code": 403,
         "message": "Request Failed , should be of principle or hod",
         "data": ""
       })
