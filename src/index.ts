@@ -7,6 +7,7 @@ import cors from "@fastify/cors";
 import AutoLoad from "@fastify/autoload";
 
 import { auth } from "./plugins/auth/index.js";
+import { sendTelegramErrorLog } from "./plugins/amsAgent.js";
 
 const fastify = Fastify({
 	logger: true,
@@ -57,6 +58,16 @@ fastify.route({
 		}
 	},
 });
+
+
+fastify.addHook('onSend', async (request, reply, payload:any) => {
+	
+	if (reply.statusCode === 500) {
+		const parsed_payload = JSON.parse(payload); //some how the payload is coming as string, therefore converetd it into json for inscpecting the error data.
+		sendTelegramErrorLog(parsed_payload, request)
+	}
+})
+
 
 fastify.listen({ port: Number(process.env.PORT) || 3000, host: process.env.HOST || "localhost" }, (err) => {
 	if (err) {
