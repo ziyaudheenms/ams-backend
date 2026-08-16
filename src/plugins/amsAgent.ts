@@ -16,7 +16,7 @@ export function sendTelegramErrorLog(errorInput: errorProps, request: FastifyReq
 
   setImmediate(async () => {
     try {
-      const botMessage = `🚨 ERROR ALERT -> *${errorInput.message || 'Unknown error'}*
+      const botMessage = ` ERROR ALERT -> *${errorInput.message || 'Unknown error'}*
 
  *Time:* \`${timestamp}\`
  *Endpoint:* \`${endpoint}\`
@@ -27,7 +27,7 @@ export function sendTelegramErrorLog(errorInput: errorProps, request: FastifyReq
 \`\`\`
 ${errorInput.error || "No stack trace"}
 \`\`\`
-👤 *User:* \`${userId}\``;
+ *User:* \`${userId}\``;
 
       await fetch(`https://api.telegram.org/bot${process.env.AMS_BOT_TOKEN}/sendMessage`, {
         method: "POST",
